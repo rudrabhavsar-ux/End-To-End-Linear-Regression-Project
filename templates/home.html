@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FWI Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 40px; }
+        .login { max-width: 420px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; font-size: 22px; }
+        input { width: 100%; padding: 10px; margin: 6px 0; box-sizing: border-box;
+                border: 1px solid #ccc; border-radius: 4px; }
+        .btn { width: 100%; padding: 10px; margin-top: 10px; background: #d9534f; color: #fff;
+               border: none; border-radius: 4px; cursor: pointer; font-size: 15px; }
+        .btn:hover { background: #c9302c; }
+        h2 { text-align: center; color: #333; font-size: 18px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="login">
+
+        <h1>Forest Fire Weather Index (FWI) Prediction</h1>
+
+        <!-- Main Input For Receiving Query to our ML -->
+
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <input type="text" name="Temperature" placeholder="Temperature" required="required" /><br>
+            <input type="text" name="RH" placeholder="RH" required="required" /><br>
+            <input type="text" name="Ws" placeholder="Ws" required="required" /><br>
+            <input type="text" name="Rain" placeholder="Rain" required="required" /><br>
+            <input type="text" name="FFMC" placeholder="FFMC" required="required" /><br>
+            <input type="text" name="DMC" placeholder="DMC" required="required" /><br>
+            <input type="text" name="ISI" placeholder="ISI" required="required" /><br>
+            <input type="text" name="Classes" placeholder="Classes (0 or 1)" required="required" /><br>
+            <input type="text" name="Region" placeholder="Region (0 or 1)" required="required" /><br>
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+
+        </form>
+
+    {% if result %}
+    <h2>
+        The FWI prediction is {{ result }}
+    </h2>
+    {% endif %}
+    </div>
+</body>
+</html>
